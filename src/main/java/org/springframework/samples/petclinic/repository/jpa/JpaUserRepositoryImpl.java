@@ -24,4 +24,9 @@ public class JpaUserRepositoryImpl implements UserRepository {
             this.em.merge(user);
         }
     }
+
+    @Override
+    public User getByUsername(String username) {
+        return this.em.find(User.class, username);
+    }
 }

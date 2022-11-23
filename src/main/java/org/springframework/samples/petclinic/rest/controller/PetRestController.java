@@ -16,6 +16,8 @@
 
 package org.springframework.samples.petclinic.rest.controller;
 
+import io.inuka.ikola.annotations.PostAuthorizeOwner;
+import io.inuka.ikola.annotations.PostAuthorizeToView;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.samples.petclinic.mapper.PetMapper;
@@ -48,7 +50,8 @@ public class PetRestController implements PetsApi {
         this.petMapper = petMapper;
     }
 
-    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
+    //@PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
+    @PostAuthorizeToView
     @Override
     public ResponseEntity<PetDto> getPet(Integer petId) {
         PetDto pet = petMapper.toPetDto(this.clinicService.findPetById(petId));
