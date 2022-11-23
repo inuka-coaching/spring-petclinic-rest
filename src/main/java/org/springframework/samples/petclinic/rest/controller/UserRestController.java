@@ -25,6 +25,9 @@ import org.springframework.samples.petclinic.rest.api.UsersApi;
 import org.springframework.samples.petclinic.rest.dto.UserDto;
 import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,9 +52,19 @@ public class UserRestController implements UsersApi {
     @PreAuthorize( "hasRole(@roles.ADMIN)" )
     @Override
     public ResponseEntity<UserDto> addUser(UserDto userDto) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         HttpHeaders headers = new HttpHeaders();
         User user = userMapper.toUser(userDto);
         this.userService.saveUser(user);
         return new ResponseEntity<>(userMapper.toUserDto(user), headers, HttpStatus.CREATED);
+    }
+
+    @PreAuthorize( "hasRole(@roles.ADMIN)" )
+    // @Override
+    public ResponseEntity<UserDto> getUser(Authentication authentication) {
+        HttpHeaders headers = new HttpHeaders();
+//        User user = userMapper.toUser(userDto);
+//        this.userService.(user);
+        return new ResponseEntity<>(userMapper.toUserDto(null), headers, HttpStatus.CREATED);
     }
 }

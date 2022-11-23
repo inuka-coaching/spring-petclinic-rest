@@ -46,7 +46,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
         }
     }
 
-    private User getByUsername(String username) {
+    public User getByUsername(String username) {
 
         Map<String, Object> params = new HashMap<>();
         params.put("username", username);

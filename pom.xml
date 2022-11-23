@@ -158,6 +158,11 @@
             <artifactId>jaxb-api</artifactId>
             <version>${jaxb-api.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.inuka</groupId>
+            <artifactId>ikola</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <build>
